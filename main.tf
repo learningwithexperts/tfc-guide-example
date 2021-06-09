@@ -1,5 +1,5 @@
 provider "aws" {
-  alias = var.aws_alias
+  alias = "cert"
   region = var.aws_region
 }
 
@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "terraform_cloud" {
 }
 
 resource "aws_acm_certificate" "cloudfront_cert" {
-  provider = aws.us-east-1
+  provider = aws.cert
   domain_name = local.domain_name
   validation_method = "DNS"
 }
@@ -40,7 +40,7 @@ resource "aws_route53_record" "cloudfront_cert" {
 }
 
 resource "aws_acm_certificate_validation" "cloudfront_cert" {
-  provider = aws.us-east-1
+  provider = aws.cert
   certificate_arn = aws_acm_certificate.cloudfront_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.cloudfront_cert : record.fqdn]
 }

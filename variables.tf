@@ -3,11 +3,6 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "aws_alias" {
-  type    = string
-  default = "us-east-1"
-}
-
 variable "dns_zone" {
   type    = string
   default = "learningwithexperts.com"
