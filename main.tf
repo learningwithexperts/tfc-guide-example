@@ -1,4 +1,5 @@
 provider "aws" {
+  version = "2.33.0"
   alias = "cert"
   region = var.aws_region
 }
