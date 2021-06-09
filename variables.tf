@@ -1,19 +1,14 @@
 variable "aws_region" {
   type    = string
-  default = "us-west-1"
+  default = "us-east-1"
 }
 
-variable "db_table_name" {
+variable "aws_alias" {
   type    = string
-  default = "terraform-learn"
+  default = "us-east-1"
 }
 
-variable "db_read_capacity" {
-  type    = number
-  default = 1
-}
-
-variable "db_write_capacity" {
-  type    = number
-  default = 1
+variable "dns_zone" {
+  type    = string
+  default = "learningwithexperts.com"
 }

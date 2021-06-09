@@ -1,10 +1,10 @@
 provider "aws" {
-  alias = "us-east-1"
-  region = "us-east-1"    # N.Virginia
+  alias = var.aws_alias
+  region = var.aws_region
 }
 
 data "aws_route53_zone" "dnszone" {
-  name = "learningwithexperts.com"
+  name = var.dns_zone
   private_zone = false
 }
 
@@ -83,6 +83,8 @@ resource "aws_cloudfront_distribution" "distribution" {
     target_origin_id = local.origin_id
     viewer_protocol_policy = "redirect-to-https"
     compress = true
+    default_ttl = 31536000
+    min_ttl = 31536000
     max_ttl = 31536000
 
     forwarded_values {
@@ -119,8 +121,4 @@ resource "aws_route53_record" "cloudfront_fqdn_dns" {
     evaluate_target_health = true
   }
   depends_on = [ aws_cloudfront_distribution.distribution ]
-}
-
-output "domain_name" {
-  value = local.domain_name
 }
